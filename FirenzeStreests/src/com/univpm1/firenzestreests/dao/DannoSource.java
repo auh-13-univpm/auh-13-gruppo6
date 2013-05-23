@@ -10,7 +10,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.univpm1.firenzestreests.entities.Danno;
-import com.univpm1.firenzestreests.entities.Sinistro;
 
 public class DannoSource {
 	// Database fields

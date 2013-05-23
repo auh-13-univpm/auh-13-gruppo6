@@ -1,14 +1,13 @@
 package com.univpm1.firenzestreests;
 
 import com.univpm1.firenzestreests.dao.IndirizzoSource;
-import com.univpm1.firenzestreests.entities.Indirizzo;
+
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 public class MainActivity extends Activity {
 

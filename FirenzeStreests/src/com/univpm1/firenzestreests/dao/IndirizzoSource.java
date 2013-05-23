@@ -14,8 +14,7 @@ public class IndirizzoSource {
 	// Database fields
 	private SQLiteDatabase database;
 	private DaoHelper dbHelper;
-	private String[] allColumns = { "id_via", "nome", "latitudine",
-			"longitudine" };
+	private String[] allColumns = { "id_via","nome","latitudine","longitudine" };
 
 	public IndirizzoSource(Context context) {
 		dbHelper = new DaoHelper(context);
@@ -34,20 +33,12 @@ public class IndirizzoSource {
 		values.put("nome", newIndirizzo.getNome());
 		values.put("longitudine", newIndirizzo.getLongitudine());
 		values.put("latitudine", newIndirizzo.getLatitudine());
-
-		//long insertId = 
 		database.insert("indirizzo", null, values);
-
-		/*
-		 * Cursor cursor = database.query("indirizzo", allColumns,"id_via = " +
-		 * insertId, null, null, null, null); cursor.moveToFirst(); Indirizzo
-		 * insetedIndirizzo = cursorToIndirizzo(cursor); cursor.close();
-		 */
 	}
 
 	public ArrayList<Indirizzo> fatchAllIndirizzi() {
 		ArrayList<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
-
+		open();
 		Cursor cursor = database.query("indirizzo", allColumns, null, null,
 				null, null, null);
 

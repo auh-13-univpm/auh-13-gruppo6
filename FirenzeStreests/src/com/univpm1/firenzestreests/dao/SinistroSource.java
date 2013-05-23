@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.univpm1.firenzestreests.entities.Indirizzo;
 import com.univpm1.firenzestreests.entities.Sinistro;
 
 public class SinistroSource {
