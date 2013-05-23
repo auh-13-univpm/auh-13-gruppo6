@@ -133,6 +133,11 @@ public class MapActivity extends Activity {
 		if(extras != null){
 			addressList = (ArrayList<Indirizzo>) extras.get("com.univpm1.firenzestreests.VIEW_MAP_COORDS");
 		}
+		
+		addressList = new ArrayList<Indirizzo>();
+		addressList.add(new Indirizzo("Viale Europa","43.757035","11.29769"));
+		addressList.add(new Indirizzo("Piazza Tommaso Alva Edison","43.786565","11.283418"));
+		addressList.add(new Indirizzo("Via dello Steccuto","43.800883","11.23856"));
 		MapView mapView = new MapView(this, 256);
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
         mapView.setMultiTouchControls(true);
