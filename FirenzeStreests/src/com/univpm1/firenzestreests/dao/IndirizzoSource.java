@@ -1,7 +1,6 @@
 package com.univpm1.firenzestreests.dao;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -52,8 +51,8 @@ public class IndirizzoSource {
 	    database.delete("indirizzo", "id_via = " + id, null);
 	  }
 
-	  public List<Indirizzo> fatchAllIndirizzi() {
-	    List<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
+	  public ArrayList<Indirizzo> fatchAllIndirizzi() {
+		  ArrayList<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
 
 	    Cursor cursor = database.query("indirizzo",allColumns, null, null, null, null, null);
 
