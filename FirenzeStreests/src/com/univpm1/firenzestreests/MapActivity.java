@@ -131,7 +131,6 @@ public class MapActivity extends Activity {
 			addressList = (ArrayList<Indirizzo>) extras.get("com.univpm1.firenzestreests.VIEW_MAP_COORDS");
 		}
 		MapView mapView = new MapView(this, 256);
-        mapView.setClickable(true);
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
         mapView.setMultiTouchControls(true);
         mapView.setBuiltInZoomControls(true);        
