@@ -11,23 +11,23 @@ public class DaoHelper extends SQLiteOpenHelper{
 	  private static final int DATABASE_VERSION = 1;
 
 	  // Database creation sql statement
-	  private static final String TABLE_INDIRIZZO = "CREATE TABLE  " +
-	  		"indirizzo (id_via integer primary key autoincrement," +
-	  		"nome varchar(60) not null," +
-	  		"latitudine varchar(15)," +
-	  		"longitudine varchar(15));";
+	  private static final String TABLE_INDIRIZZO = " CREATE TABLE  " +
+	  		" indirizzo (id_via integer primary key autoincrement ," +
+	  		" nome varchar(60) not null ," +
+	  		" latitudine varchar(15) ," +
+	  		" longitudine varchar(15));";
 	  private static final String TABLE_SINISTRO =
-	  		" CREATE TABLE sinistro(id_sinistro integer primary key autoincrement, " +
-	  		"id_via_Fk integer," +
-	  		"FOREIGN KEY(id_via_Fk) REFERENCES indirizzo(id_via)," +
-	  		" anno integer not null, " +
+	  		" CREATE TABLE sinistro(id_sinistro integer primary key autoincrement , " +
+	  		" id_via_Fk integer ," +
+	  		" FOREIGN KEY(id_via_Fk) REFERENCES indirizzo(id_via) ," +
+	  		" anno integer , " +
 	  		" numero integer);";
 	  private static final String TABLE_DANNO =
-	  		" CREATE TABLE danno(id_danno integer primary key autoincrement," +
-	  		" id_via_Fk integer," +
-	  		"FOREIGN KEY(id_via_Fk) REFERENCES indirizzo(id_via)," +
-	  		" lesioni integer," +
-	  		" contusi integer," +
+	  		" CREATE TABLE danno(id_danno integer primary key autoincrement ," +
+	  		" id_via_Fk integer ," +
+	  		" FOREIGN KEY(id_via_Fk) REFERENCES indirizzo(id_via) ," +
+	  		" lesioni integer ," +
+	  		" contusi integer ," +
 	  		" morti integer);";
 
 	  public DaoHelper(Context context) {
@@ -36,17 +36,19 @@ public class DaoHelper extends SQLiteOpenHelper{
 
 	  @Override
 	  public void onCreate(SQLiteDatabase database) {
+		System.out.println(TABLE_INDIRIZZO);
 	    database.execSQL(TABLE_INDIRIZZO);
+	    System.out.println(TABLE_SINISTRO);
 	    database.execSQL(TABLE_SINISTRO);
+	    System.out.println(TABLE_DANNO);
 	    database.execSQL(TABLE_DANNO);
 	  }
 
 	  @Override
 	  public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-	    Log.w(DaoHelper.class.getName(),
-	        "Upgrading database from version " + oldVersion + " to "
-	            + newVersion + ", which will destroy all old data");
-	    db.execSQL("DROP TABLES IF EXISTS: indirizzo , danno, sinistro " );
+	    db.execSQL("DROP TABLES IF EXISTS: "+ TABLE_INDIRIZZO);
+	    db.execSQL("DROP TABLES IF EXISTS: "+ TABLE_SINISTRO);
+	    db.execSQL("DROP TABLES IF EXISTS: "+ TABLE_DANNO);
 	    onCreate(db);
 	  }
 }
