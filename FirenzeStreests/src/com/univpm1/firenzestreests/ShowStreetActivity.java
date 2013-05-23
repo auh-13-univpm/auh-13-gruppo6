@@ -10,11 +10,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.widget.Toast;
 
 public class ShowStreetActivity extends Activity {
 
-	protected Indirizzo _refID = null;
 
+	@SuppressWarnings("unused")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,35 +25,19 @@ public class ShowStreetActivity extends Activity {
 		if(extras != null){
 			idIndirizzo = extras.getString("com.univpm1.firenzestreests.ID_INDIRIZZO");
 		}
-
+		if(idIndirizzo == null){
+			Intent intent = new Intent(this, MainActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			this.startActivity(intent);
+			Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.erroreIdIndirizzo) , Toast.LENGTH_SHORT);
+			toast.show();
+		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_show_street, menu);
-		
-		Intent arg;
-		List<Sinistro> refCrash;
-		try {
-			arg = this.getIntent();
-			_refID = (Indirizzo) arg.getSerializableExtra("Indirizzo");
-			
-			refCrash = null;// TODO:  new SinistroSource(getApplicationContext()).
-			
-		} catch (Exception e) {
-			/* Non è stato passato un Intent contenente 
-			 * il dato "Indirizzo" necessario per la compilazione della pagina.
-			 * Redirect verso MainActivity. 
-			 */
-			arg = new Intent(this, MainActivity.class);
-			arg.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			this.startActivity(arg);
-		}
-		
-		/*for (Sinistro currentCrash : refCrash) {
-			
-		}*/
 
 		return true;
 	}
