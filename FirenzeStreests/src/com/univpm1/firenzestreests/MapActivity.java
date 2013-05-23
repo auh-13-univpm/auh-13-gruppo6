@@ -9,11 +9,13 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
+import com.univpm1.firenzestreests.util.MyItemizedOverlay;
 import com.univpm1.firenzestreests.util.SystemUiHider;
 import com.univpm1.firenzestreests.entities.*;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -147,9 +149,21 @@ public class MapActivity extends Activity {
 //        for(GeoPoint punto : puntiGps){
 //        	mapView.getController().animateTo(punto);
 //        }     
-        DefaultResourceProxyImpl defaultResourceProxyImpl = new DefaultResourceProxyImpl(getApplicationContext());
-        ItemizedIconOverlay<OverlayItem> myItemizedIconOverlay  = new ItemizedIconOverlay<OverlayItem>(puntiGps, null, defaultResourceProxyImpl);
-        mapView.getOverlays().add(myItemizedIconOverlay);
+        Drawable marker=getResources().getDrawable(R.drawable.crashcar);
+        int markerWidth = marker.getIntrinsicWidth();
+        int markerHeight = marker.getIntrinsicHeight();
+        marker.setBounds(0, markerHeight, markerWidth, 0);
+        
+        DefaultResourceProxyImpl resourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
+        MyItemizedOverlay myItemizedOverlay = new MyItemizedOverlay(marker, resourceProxy);
+        mapView.getOverlays().add(myItemizedOverlay);
+        
+//        ItemizedIconOverlay<OverlayItem> myItemizedIconOverlay  = new ItemizedIconOverlay<OverlayItem>(puntiGps, null, defaultResourceProxyImpl);
+//        mapView.getOverlays().add(myItemizedIconOverlay);
+        for(Indirizzo ind : addressList){
+        	myItemizedOverlay.addItem(new GeoPoint(Double.valueOf(ind.getLongitudine()).doubleValue(), Double.valueOf(ind.getLatitudine()).doubleValue()), ind.getNome(), ind.getNome());
+        }
+        
         setContentView(mapView);
         mapView.invalidate();
 	}
