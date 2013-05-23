@@ -1,8 +1,8 @@
 package com.univpm1.firenzestreests.dao;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DaoHelper extends SQLiteOpenHelper{
 	
@@ -36,15 +36,15 @@ public class DaoHelper extends SQLiteOpenHelper{
 	  @Override
 	  public void onCreate(SQLiteDatabase database) {
 	    database.execSQL(TABLE_INDIRIZZO);
-	  //  database.execSQL(TABLE_SINISTRO);
-	    //database.execSQL(TABLE_DANNO);
+	    database.execSQL(TABLE_SINISTRO);
+	    database.execSQL(TABLE_DANNO);
 	  }
 
 	  @Override
 	  public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 	    db.execSQL("DROP TABLES IF EXISTS: "+ TABLE_INDIRIZZO);
-	    //db.execSQL("DROP TABLES IF EXISTS: "+ TABLE_SINISTRO);
-	    //db.execSQL("DROP TABLES IF EXISTS: "+ TABLE_DANNO);
+	    db.execSQL("DROP TABLES IF EXISTS: "+ TABLE_SINISTRO);
+	    db.execSQL("DROP TABLES IF EXISTS: "+ TABLE_DANNO);
 	    onCreate(db);
 	  }
 }
