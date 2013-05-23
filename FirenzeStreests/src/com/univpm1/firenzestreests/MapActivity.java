@@ -53,6 +53,7 @@ public class MapActivity extends Activity {
 	 */
 	private SystemUiHider mSystemUiHider;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -124,18 +125,28 @@ public class MapActivity extends Activity {
 		// operations to prevent the jarring behavior of controls going away
 		// while interacting with the UI.
 		Bundle extras = getIntent().getExtras();
-		ArrayList<Indirizzo> addressList;
+		ArrayList<Indirizzo> addressList = null;
 		if(extras != null){
-			addressList = (ArrayList<Indirizzo>) extras.get("com.univpm1.firenzestreests");
+			addressList = (ArrayList<Indirizzo>) extras.get("com.univpm1.firenzestreests.VIEW_MAP_COORDS");
 		}
 		MapView mapView = new MapView(this, 256);
         mapView.setClickable(true);
-        mapView.setBuiltInZoomControls(true);
- 
+        mapView.setBuiltInZoomControls(true);        
         mapView.getController().setZoom(10);
-        mapView.getController().setCenter(new GeoPoint(39.461078, 2.856445));
- 
+        ArrayList<GeoPoint> puntiGps = indirizzoToGeoPoint(addressList);        
+        mapView.getController().setCenter(new GeoPoint(43.771031,11.248));
+        for(GeoPoint punto : puntiGps){
+        	mapView.getController().animateTo(punto);
+        }     
         setContentView(mapView);
+	}
+	private ArrayList<GeoPoint> indirizzoToGeoPoint(ArrayList<Indirizzo> indirizzi)
+	{
+		ArrayList<GeoPoint> toReturn = new ArrayList<GeoPoint>();
+		for(Indirizzo ind : indirizzi){
+			toReturn.add(new GeoPoint(Double.valueOf(ind.getLatitudine()).doubleValue(), Double.valueOf(ind.getLongitudine()).doubleValue()));
+		}
+		return toReturn;
 	}
 
 	@Override
