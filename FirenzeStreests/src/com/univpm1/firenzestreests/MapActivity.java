@@ -144,12 +144,8 @@ public class MapActivity extends Activity {
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
         mapView.setMultiTouchControls(true);
         mapView.setBuiltInZoomControls(true);        
-        mapView.getController().setZoom(10);
-        ArrayList<OverlayItem> puntiGps = indirizzoToGeoPoint(addressList);        
+        mapView.getController().setZoom(12);   
         mapView.getController().setCenter(new GeoPoint(43.771031,11.248));
-//        for(GeoPoint punto : puntiGps){
-//        	mapView.getController().animateTo(punto);
-//        }     
         Drawable marker=getResources().getDrawable(R.drawable.crashcar);
         int markerWidth = marker.getIntrinsicWidth();
         int markerHeight = marker.getIntrinsicHeight();
@@ -158,22 +154,12 @@ public class MapActivity extends Activity {
 		MyItemizedOverlay myItemizedOverlay = new MyItemizedOverlay(marker, this);
         mapView.getOverlays().add(myItemizedOverlay);
         
-//        ItemizedIconOverlay<OverlayItem> myItemizedIconOverlay  = new ItemizedIconOverlay<OverlayItem>(puntiGps, null, defaultResourceProxyImpl);
-//        mapView.getOverlays().add(myItemizedIconOverlay);
         for(Indirizzo ind : addressList){
         	myItemizedOverlay.addItem(new GeoPoint(Double.valueOf(ind.getLongitudine()).doubleValue(), Double.valueOf(ind.getLatitudine()).doubleValue()), ind.getNome(), ind.getNome(), ind.getId());
         }
         
         setContentView(mapView);
         mapView.invalidate();
-	}
-	private ArrayList<OverlayItem> indirizzoToGeoPoint(ArrayList<Indirizzo> indirizzi)
-	{
-		ArrayList<OverlayItem> toReturn = new ArrayList<OverlayItem>();
-		for(Indirizzo ind : indirizzi){
-			toReturn.add(new OverlayItem(Integer.valueOf(ind.getId()).toString(),ind.getNome(), ind.getNome(), new GeoPoint(Double.valueOf(ind.getLatitudine()).doubleValue(), Double.valueOf(ind.getLongitudine()).doubleValue())));
-		}
-		return toReturn;
 	}
 
 	@Override
