@@ -11,19 +11,21 @@ public class DaoHelper extends SQLiteOpenHelper{
 	  private static final int DATABASE_VERSION = 1;
 
 	  // Database creation sql statement
-	  private static final String DATABASE_CREATE = "CREATE TABLE  " +
+	  private static final String TABLE_INDIRIZZI = "CREATE TABLE  " +
 	  		"indirizzo (id_via integer primary key autoincrement," +
 	  		"nome varchar(60) not null," +
 	  		"latidudine varchar(15)," +
-	  		"longitudine varchar(15));" +
+	  		"longitudine varchar(15));" ;
+	  private static final String TABLE_SINISTRI =
 	  		" CREATE TABLE sinistro(id_sinistro integer primary key autoincrement, " +
 	  		"id_via_Fk integer," +
-	  		"FOREIGN KEY(id_via_Fk) REFERENCES via(id_via)," +
+	  		"FOREIGN KEY(id_via_Fk) REFERENCES indirizzo(id_via)," +
 	  		"anno integer not null, " +
-	  		"numero intger);" +
+	  		"numero intger);";
+	  private static final String TABLE_DANNI=
 	  		" CREATE TABLE danno(id_danno integer primary key autoincrement," +
 	  		" id_via_Fk integer," +
-	  		"FOREIGN KEY(id_via_Fk) REFERENCES via(id_via)," +
+	  		"FOREIGN KEY(id_via_Fk) REFERENCES indirizzo(id_via)," +
 	  		" lesioni integer," +
 	  		" contusi integer," +
 	  		" morti integer);";
@@ -34,7 +36,9 @@ public class DaoHelper extends SQLiteOpenHelper{
 
 	  @Override
 	  public void onCreate(SQLiteDatabase database) {
-	    database.execSQL(DATABASE_CREATE);
+	    database.execSQL(TABLE_INDIRIZZI);
+	    database.execSQL(TABLE_SINISTRI);
+	    database.execSQL(TABLE_DANNI);
 	  }
 
 	  @Override
