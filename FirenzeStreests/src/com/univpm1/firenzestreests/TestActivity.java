@@ -1,9 +1,8 @@
 package com.univpm1.firenzestreests;
 
-import java.util.List;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +11,7 @@ import android.widget.ArrayAdapter;
 
 import com.univpm1.firenzestreests.dao.IndirizzoSource;
 import com.univpm1.firenzestreests.entities.Indirizzo;
+
 public class TestActivity extends ListActivity {
 
 	private IndirizzoSource datasource;
@@ -22,15 +22,19 @@ public class TestActivity extends ListActivity {
 		setContentView(R.layout.activity_test);
 		getIntent();
 		datasource = new IndirizzoSource(this);
-	    datasource.open();
+		datasource.open();
 
-	   // List<Indirizzo> values = datasource.fatchAllIndirizzi();
-
-	    // Use the SimpleCursorAdapter to show the
-	    // elements in a ListView
-	    
-	  //  ArrayAdapter<Indirizzo> adapter = new ArrayAdapter<Indirizzo>(this,android.R.layout.simple_list_item_1, values);
-	  //  setListAdapter(adapter);
+		 ArrayList<Indirizzo> values = datasource.fatchAllIndirizzi();
+		 Iterator<Indirizzo> iterator=values.iterator();
+		 
+		/* while(iterator.hasNext()){
+			 System.out.println(iterator.next().getId());
+		 }
+		 */
+		 ArrayAdapter<Indirizzo> adapter = new
+		 ArrayAdapter<Indirizzo>(this,android.R.layout.simple_list_item_1,
+		 values);
+		 setListAdapter(adapter);
 	}
 
 	@Override
@@ -39,40 +43,38 @@ public class TestActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.test, menu);
 		return true;
 	}
+
 	// Will be called via the onClick attribute
-	  // of the buttons in main.xml
-	  public void onClick(View view) {
-	    @SuppressWarnings("unchecked")
-	    ArrayAdapter<Indirizzo> adapter = (ArrayAdapter<Indirizzo>) getListAdapter();
-	    Indirizzo testInd = null;
-	    switch (view.getId()) {
-	    case R.id.add:
-	      Indirizzo indirizzi = new Indirizzo("via prova"," 12 ", "12");
-	      //int nextInt = new Random().nextInt(3);
-	      // Save the new comment to the database
-	      testInd = datasource.createIndirizzo(indirizzi);
-	      adapter.add(testInd);
-	      break;
-	      /*case R.id.delete:
-	      if (getListAdapter().getCount() > 0) {
-	        comment = (Comment) getListAdapter().getItem(0);
-	        datasource.deleteComment(comment);
-	        adapter.remove(comment);
-	      }
-	      break;*/
-	    }
-	    adapter.notifyDataSetChanged();
-	  }
+	// of the buttons in main.xml
+	public void onClick(View view) {
+		@SuppressWarnings("unchecked")
+		ArrayAdapter<Indirizzo> adapter = (ArrayAdapter<Indirizzo>) getListAdapter();
+		switch (view.getId()) {
+		case R.id.add:
+			Indirizzo indirizzi = new Indirizzo("via prova", "12 ", "12");
+			datasource.insertIndirizzo(indirizzi);
+			break;
+		case R.id.list:
 
-	  @Override
-	  protected void onResume() {
-	    datasource.open();
-	    super.onResume();
-	  }
+			break;
+		/*
+		 * case R.id.delete: if (getListAdapter().getCount() > 0) { comment =
+		 * (Comment) getListAdapter().getItem(0);
+		 * datasource.deleteComment(comment); adapter.remove(comment); } break;
+		 */
+		}
+		adapter.notifyDataSetChanged();
+	}
 
-	  @Override
-	  protected void onPause() {
-	    datasource.close();
-	    super.onPause();
-	  }
+	@Override
+	protected void onResume() {
+		datasource.open();
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause() {
+		datasource.close();
+		super.onPause();
+	}
 }

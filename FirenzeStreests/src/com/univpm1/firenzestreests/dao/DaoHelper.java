@@ -9,7 +9,6 @@ public class DaoHelper extends SQLiteOpenHelper{
 	  private static final String DATABASE_NAME = "sinistri.db";
 	  private static final int DATABASE_VERSION = 1;
 
-	  // Database creation sql statement
 	  private static final String TABLE_INDIRIZZO = " CREATE TABLE  " +
 	  		" indirizzo (id_via integer primary key autoincrement ," +
 	  		" nome varchar(60) not null ," +
