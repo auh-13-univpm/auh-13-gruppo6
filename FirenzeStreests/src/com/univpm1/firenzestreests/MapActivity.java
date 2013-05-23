@@ -1,6 +1,12 @@
 package com.univpm1.firenzestreests;
 
+import java.util.ArrayList;
+
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+
 import com.univpm1.firenzestreests.util.SystemUiHider;
+import com.univpm1.firenzestreests.entities.*;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -117,8 +123,19 @@ public class MapActivity extends Activity {
 		// Upon interacting with UI controls, delay any scheduled hide()
 		// operations to prevent the jarring behavior of controls going away
 		// while interacting with the UI.
-		findViewById(R.id.dummy_button).setOnTouchListener(
-				mDelayHideTouchListener);
+		Bundle extras = getIntent().getExtras();
+		ArrayList<Indirizzo> addressList;
+		if(extras != null){
+			addressList = (ArrayList<Indirizzo>) extras.get("com.univpm1.firenzestreests");
+		}
+		MapView mapView = new MapView(this, 256);
+        mapView.setClickable(true);
+        mapView.setBuiltInZoomControls(true);
+ 
+        mapView.getController().setZoom(10);
+        mapView.getController().setCenter(new GeoPoint(39.461078, 2.856445));
+ 
+        setContentView(mapView);
 	}
 
 	@Override
