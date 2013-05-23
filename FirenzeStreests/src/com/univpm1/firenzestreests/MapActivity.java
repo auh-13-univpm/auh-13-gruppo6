@@ -3,6 +3,7 @@ package com.univpm1.firenzestreests;
 import java.util.ArrayList;
 
 import org.osmdroid.DefaultResourceProxyImpl;
+import org.osmdroid.ResourceProxy;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -154,14 +155,13 @@ public class MapActivity extends Activity {
         int markerHeight = marker.getIntrinsicHeight();
         marker.setBounds(0, markerHeight, markerWidth, 0);
         
-        DefaultResourceProxyImpl resourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
-        MyItemizedOverlay myItemizedOverlay = new MyItemizedOverlay(marker, resourceProxy);
+		MyItemizedOverlay myItemizedOverlay = new MyItemizedOverlay(marker, this);
         mapView.getOverlays().add(myItemizedOverlay);
         
 //        ItemizedIconOverlay<OverlayItem> myItemizedIconOverlay  = new ItemizedIconOverlay<OverlayItem>(puntiGps, null, defaultResourceProxyImpl);
 //        mapView.getOverlays().add(myItemizedIconOverlay);
         for(Indirizzo ind : addressList){
-        	myItemizedOverlay.addItem(new GeoPoint(Double.valueOf(ind.getLongitudine()).doubleValue(), Double.valueOf(ind.getLatitudine()).doubleValue()), ind.getNome(), ind.getNome());
+        	myItemizedOverlay.addItem(new GeoPoint(Double.valueOf(ind.getLongitudine()).doubleValue(), Double.valueOf(ind.getLatitudine()).doubleValue()), ind.getNome(), ind.getNome(), ind.getId());
         }
         
         setContentView(mapView);

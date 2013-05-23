@@ -1,6 +1,5 @@
 package com.univpm1.firenzestreests;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.univpm1.firenzestreests.dao.SinistroSource;
@@ -20,6 +19,11 @@ public class ShowStreetActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_street);
+		String idIndirizzo = null;
+		Bundle extras = getIntent().getExtras();
+		if(extras != null){
+			idIndirizzo = extras.getString("com.univpm1.firenzestreests.ID_INDIRIZZO");
+		}
 
 	}
 
