@@ -30,22 +30,13 @@ public class SinistroSource {
 		dbHelper.close();
 	}
 
-	public Sinistro createSinistro(Sinistro newSinistro) {
+	public void insertSinistro(Sinistro newSinistro) {
 		ContentValues values = new ContentValues();
-		
-		long insertId = database.insert("sinistro", null, values);
-
-		Cursor cursor = database.query("sinistro", allColumns, "id_sinistro = "
-				+ insertId, null, null, null, null);
-		cursor.moveToFirst();
-		Sinistro insetedSinistro = cursorToSinistro(cursor);
-		cursor.close();
-		return insetedSinistro;
+		database.insert("sinistro", null, values);
 	}
 
 	public void deleteComment(Indirizzo viaToDelete) {
 		long id = viaToDelete.getId();
-		System.out.println("Comment deleted with id: " + id);
 		database.delete("indirizzo", "id_via = " + id, null);
 	}
 
@@ -65,6 +56,22 @@ public class SinistroSource {
 		return sinistri;
 	}
 
+	public List<Sinistro> getSinistroByVia(String[] id_via) {
+		List<Sinistro> sinistri = new ArrayList<Sinistro>();
+
+		Cursor cursor = database.rawQuery("select * from sinistro where id_via_Fk = ", id_via);
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Sinistro sinistro = cursorToSinistro(cursor);
+			sinistri.add(sinistro);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return sinistri;
+	}
+	
+	
 	private Sinistro cursorToSinistro(Cursor cursor) {
 		Sinistro sinistro = new Sinistro();
 		

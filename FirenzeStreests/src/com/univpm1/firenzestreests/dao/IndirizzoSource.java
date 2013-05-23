@@ -35,7 +35,8 @@ public class IndirizzoSource {
 		values.put("longitudine", newIndirizzo.getLongitudine());
 		values.put("latitudine", newIndirizzo.getLatitudine());
 
-		long insertId = database.insert("indirizzo", null, values);
+		//long insertId = 
+		database.insert("indirizzo", null, values);
 
 		/*
 		 * Cursor cursor = database.query("indirizzo", allColumns,"id_via = " +
@@ -66,6 +67,7 @@ public class IndirizzoSource {
 		cursor.close();
 		return indirizzi;
 	}
+	
 
 	private Indirizzo cursorToIndirizzo(Cursor cursor) {
 		Indirizzo indirizzo = new Indirizzo();
