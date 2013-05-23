@@ -46,9 +46,9 @@ public class ShowStreetActivity extends Activity {
 			this.startActivity(arg);
 		}
 		
-		for (Sinistro currentCrash : refCrash) {
+		/*for (Sinistro currentCrash : refCrash) {
 			
-		}
+		}*/
 
 		return true;
 	}
