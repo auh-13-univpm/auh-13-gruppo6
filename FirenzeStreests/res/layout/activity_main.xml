@@ -46,7 +46,7 @@
             android:layout_height="96dp"
             android:background="@drawable/list"
             android:contentDescription="@string/list"
-            android:onClick="onClick" />
+            android:onClick="dbTest" />
 
         <TextView
             android:layout_width="fill_parent"

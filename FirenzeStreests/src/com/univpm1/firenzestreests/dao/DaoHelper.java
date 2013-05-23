@@ -20,7 +20,7 @@ public class DaoHelper extends SQLiteOpenHelper{
 	  		" anno integer , " +
 	  		" numero integer, " +
 	  		" id_via_Fk integer ," +
-	  		" FOREIGN KEY(id_via_Fk) REFERENCES indirizzo(id_via);";
+	  		" FOREIGN KEY(id_via_Fk) REFERENCES indirizzo(id_via));";
 	  private static final String TABLE_DANNO =
 	  		" CREATE TABLE danno(id_danno integer primary key autoincrement ," +
 	  		" lesioni integer ," +
