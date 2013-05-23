@@ -52,7 +52,7 @@ public class IndirizzoSource {
 	    database.delete("indirizzo", "id_via = " + id, null);
 	  }
 
-	  public List<Indirizzo> fatchAllComments() {
+	  public List<Indirizzo> fatchAllIndirizzi() {
 	    List<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
 
 	    Cursor cursor = database.query("indirizzo",allColumns, null, null, null, null, null);
