@@ -47,6 +47,10 @@
             android:name="com.univpm1.firenzestreests.ShowStreetActivity"
             android:label="@string/title_activity_show_street" >
         </activity>
+        <activity
+            android:name="com.univpm1.firenzestreests.SettingActivity"
+            android:label="@string/title_activity_setting" >
+        </activity>
     </application>
 
 </manifest>

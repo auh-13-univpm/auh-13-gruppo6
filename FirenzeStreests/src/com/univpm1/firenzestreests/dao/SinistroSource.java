@@ -1,7 +1,5 @@
 package com.univpm1.firenzestreests.dao;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -55,7 +53,9 @@ public class SinistroSource {
 		
 		ArrayList<Sinistro> sinistri = new ArrayList<Sinistro>();
 
-		Cursor cursor = database.rawQuery("select * from sinistro where id_via_Fk = ", id_via);
+        //query("sinistro", allColumns, "id_via_Fk = ?", id_via, groupBy, having, orderBy,)
+		Cursor cursor=database.query("sinistro", allColumns, "id_via_Fk = ?", id_via, null, null, null);
+		//.rawQuery("select * from sinistro where id_via_Fk = ", id_via);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {

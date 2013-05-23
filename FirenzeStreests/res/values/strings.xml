@@ -15,5 +15,6 @@
     <string name="setting">Impostazioni</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_show_street">ShowStreetActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
 
 </resources>
