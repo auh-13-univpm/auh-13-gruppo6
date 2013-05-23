@@ -38,7 +38,7 @@ public class IndirizzoSource {
 	    long insertId = database.insert("indirizzo", null,values);
 	    
 	    Cursor cursor = database.query("indirizzo",
-	        allColumns,"id_indirizzo = " + insertId, null,
+	        allColumns,"id_via = " + insertId, null,
 	        null, null, null);
 	    cursor.moveToFirst();
 	    Indirizzo insetedIndirizzo = cursorToIndirizzo(cursor);
