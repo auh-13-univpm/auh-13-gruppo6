@@ -130,11 +130,10 @@ public class MapActivity extends Activity {
 		// while interacting with the UI.
 		Bundle extras = getIntent().getExtras();
 		ArrayList<Indirizzo> addressList = new ArrayList<Indirizzo>();
-		if(extras != null){
-			addressList = (ArrayList<Indirizzo>) extras.get("com.univpm1.firenzestreests.VIEW_MAP_COORDS");
-		}
+//		if(extras != null){
+//			addressList = (ArrayList<Indirizzo>) extras.get("com.univpm1.firenzestreests.VIEW_MAP_COORDS");
+//		}
 		
-		addressList = new ArrayList<Indirizzo>();
 		addressList.add(new Indirizzo("Viale Europa","43.757035","11.29769"));
 		addressList.add(new Indirizzo("Piazza Tommaso Alva Edison","43.786565","11.283418"));
 		addressList.add(new Indirizzo("Via dello Steccuto","43.800883","11.23856"));
