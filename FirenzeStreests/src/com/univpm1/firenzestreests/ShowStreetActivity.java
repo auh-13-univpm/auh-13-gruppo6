@@ -1,8 +1,11 @@
 package com.univpm1.firenzestreests;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.univpm1.firenzestreests.dao.DannoSource;
 import com.univpm1.firenzestreests.dao.SinistroSource;
+import com.univpm1.firenzestreests.entities.Danno;
 import com.univpm1.firenzestreests.entities.Indirizzo;
 import com.univpm1.firenzestreests.entities.Sinistro;
 
@@ -32,6 +35,16 @@ public class ShowStreetActivity extends Activity {
 			Toast toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.erroreIdIndirizzo) , Toast.LENGTH_SHORT);
 			toast.show();
 		}
+		DannoSource danniDb = new DannoSource(getApplicationContext());
+		ArrayList<Danno> danni;
+		danniDb.open();
+		danni = danniDb.getDannoByVia(new String[]{idIndirizzo});
+		danniDb.close();
+		SinistroSource sinistriDb = new SinistroSource(getApplicationContext());
+		ArrayList<Sinistro> sinistri;
+		sinistriDb.open();
+		sinistri = sinistriDb.getSinistroByVia(new String[]{idIndirizzo});
+		sinistriDb.close();
 	}
 
 	@Override

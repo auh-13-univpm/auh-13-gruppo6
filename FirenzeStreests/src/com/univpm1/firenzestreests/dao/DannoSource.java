@@ -9,6 +9,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.univpm1.firenzestreests.entities.Danno;
+import com.univpm1.firenzestreests.entities.Sinistro;
 
 public class DannoSource {
 	
@@ -54,6 +55,20 @@ public class DannoSource {
 		}
 		cursor.close();
 		return danni;
+	}
+	public ArrayList<Danno> getDannoByVia(String[] id_via) {
+		
+		ArrayList<Danno> danno = new ArrayList<Danno>();
+		Cursor cursor=database.query("danno", allColumns, "id_via_Fk = ?", id_via, null, null, null);
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Danno sinistro = cursorToDanno(cursor);
+			danno.add(sinistro);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return danno;
 	}
 
 	private Danno cursorToDanno(Cursor cursor) {
