@@ -45,12 +45,6 @@ public class IndirizzoSource {
 		 */
 	}
 
-	public void deleteComment(Indirizzo viaToDelete) {
-		long id = viaToDelete.getId();
-		System.out.println("Comment deleted with id: " + id);
-		database.delete("indirizzo", "id_via = " + id, null);
-	}
-
 	public ArrayList<Indirizzo> fatchAllIndirizzi() {
 		ArrayList<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
 

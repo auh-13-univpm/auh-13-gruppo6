@@ -35,11 +35,6 @@ public class SinistroSource {
 		database.insert("sinistro", null, values);
 	}
 
-	public void deleteComment(Indirizzo viaToDelete) {
-		long id = viaToDelete.getId();
-		database.delete("indirizzo", "id_via = " + id, null);
-	}
-
 	public List<Sinistro> fatchAllIndirizzi() {
 		List<Sinistro> sinistri = new ArrayList<Sinistro>();
 

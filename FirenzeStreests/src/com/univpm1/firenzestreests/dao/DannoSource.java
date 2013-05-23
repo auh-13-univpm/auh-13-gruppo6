@@ -9,7 +9,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.univpm1.firenzestreests.entities.Indirizzo;
+import com.univpm1.firenzestreests.entities.Danno;
 import com.univpm1.firenzestreests.entities.Sinistro;
 
 public class DannoSource {
@@ -30,44 +30,40 @@ public class DannoSource {
 		dbHelper.close();
 	}
 
-	public Sinistro createSinistro(Sinistro newSinistro) {
+	public void insertDanno(Danno newDanno) {
 		ContentValues values = new ContentValues();
+		
+		values.put("id_via",  newDanno.getIdVia());
+		values.put("lesioni",  newDanno.getLesioni());
+		values.put("contusi",  newDanno.getMorti());
+		
+		database.insert("danno", null, values);
 
-		long insertId = database.insert("sinistro", null, values);
-
-		Cursor cursor = database.query("sinistro", allColumns, "id_sinistro = "
-				+ insertId, null, null, null, null);
-		cursor.moveToFirst();
-		Sinistro insetedSinistro = cursorToSinistro(cursor);
-		cursor.close();
-		return insetedSinistro;
 	}
 
-	public void deleteComment(Indirizzo viaToDelete) {
-		long id = viaToDelete.getId();
-		System.out.println("Comment deleted with id: " + id);
-		database.delete("indirizzo", "id_via = " + id, null);
-	}
+	public List<Danno> fatchAllDanni() {
+		List<Danno> danni = new ArrayList<Danno>();
 
-	public List<Sinistro> fatchAllIndirizzi() {
-		List<Sinistro> sinistri = new ArrayList<Sinistro>();
-
-		Cursor cursor = database.query("indirizzo", allColumns, null, null,
+		Cursor cursor = database.query("danno", allColumns, null, null,
 				null, null, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			Sinistro sinistro = cursorToSinistro(cursor);
-			sinistri.add(sinistro);
+			Danno danno = cursorToDanno(cursor);
+			danni.add(danno);
 			cursor.moveToNext();
 		}
 		cursor.close();
-		return sinistri;
+		return danni;
 	}
 
-	private Sinistro cursorToSinistro(Cursor cursor) {
-		Sinistro sinistro = new Sinistro();
+	private Danno cursorToDanno(Cursor cursor) {
+		Danno danno = new Danno();
 
-		return sinistro;
+		danno.setIdVia(cursor.getInt(1));
+		danno.setContusi(cursor.getInt(2));
+		danno.setMorti(cursor.getInt(3));
+		
+		return danno;
 	}
 }
