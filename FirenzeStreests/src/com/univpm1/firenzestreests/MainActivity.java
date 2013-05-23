@@ -1,5 +1,6 @@
 package com.univpm1.firenzestreests;
 
+import com.univpm1.firenzestreests.dao.IndirizzoSource;
 import com.univpm1.firenzestreests.entities.Indirizzo;
 
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class MainActivity extends Activity {
 	}
 	public void onClick(View view) {
 	    Intent intent = new Intent(this, MapActivity.class);
+	    intent.putExtra("com.univpm1.firenzestreests.VIEW_MAP_COORDS",new IndirizzoSource(getApplicationContext()).fatchAllIndirizzi());
 	    startActivity(intent);
 	}
 	public void dbTest(View View){
