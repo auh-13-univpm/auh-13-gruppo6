@@ -125,7 +125,7 @@ public class MapActivity extends Activity {
 		// operations to prevent the jarring behavior of controls going away
 		// while interacting with the UI.
 		Bundle extras = getIntent().getExtras();
-		ArrayList<Indirizzo> addressList = null;
+		ArrayList<Indirizzo> addressList = new ArrayList<Indirizzo>();
 		if(extras != null){
 			addressList = (ArrayList<Indirizzo>) extras.get("com.univpm1.firenzestreests.VIEW_MAP_COORDS");
 		}
