@@ -2,9 +2,12 @@ package com.univpm1.firenzestreests;
 
 import java.util.ArrayList;
 
+import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.ItemizedIconOverlay;
+import org.osmdroid.views.overlay.OverlayItem;
 
 import com.univpm1.firenzestreests.util.SystemUiHider;
 import com.univpm1.firenzestreests.entities.*;
@@ -135,18 +138,21 @@ public class MapActivity extends Activity {
         mapView.setMultiTouchControls(true);
         mapView.setBuiltInZoomControls(true);        
         mapView.getController().setZoom(10);
-        ArrayList<GeoPoint> puntiGps = indirizzoToGeoPoint(addressList);        
+        ArrayList<OverlayItem> puntiGps = indirizzoToGeoPoint(addressList);        
         mapView.getController().setCenter(new GeoPoint(43.771031,11.248));
-        for(GeoPoint punto : puntiGps){
-        	mapView.getController().animateTo(punto);
-        }     
+//        for(GeoPoint punto : puntiGps){
+//        	mapView.getController().animateTo(punto);
+//        }     
+        DefaultResourceProxyImpl defaultResourceProxyImpl = new DefaultResourceProxyImpl(this);
+        ItemizedIconOverlay<OverlayItem> myItemizedIconOverlay  = new ItemizedIconOverlay<OverlayItem>(puntiGps, null, defaultResourceProxyImpl);
+        mapView.getOverlays().add(myItemizedIconOverlay);
         setContentView(mapView);
 	}
-	private ArrayList<GeoPoint> indirizzoToGeoPoint(ArrayList<Indirizzo> indirizzi)
+	private ArrayList<OverlayItem> indirizzoToGeoPoint(ArrayList<Indirizzo> indirizzi)
 	{
-		ArrayList<GeoPoint> toReturn = new ArrayList<GeoPoint>();
+		ArrayList<OverlayItem> toReturn = new ArrayList<OverlayItem>();
 		for(Indirizzo ind : indirizzi){
-			toReturn.add(new GeoPoint(Double.valueOf(ind.getLatitudine()).doubleValue(), Double.valueOf(ind.getLongitudine()).doubleValue()));
+			toReturn.add(new OverlayItem(Integer.valueOf(ind.getId()).toString(),ind.getNome(), ind.getNome(), new GeoPoint(Double.valueOf(ind.getLatitudine()).doubleValue(), Double.valueOf(ind.getLongitudine()).doubleValue())));
 		}
 		return toReturn;
 	}
