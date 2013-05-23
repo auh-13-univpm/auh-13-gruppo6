@@ -11,7 +11,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.univpm1.firenzestreests.entities.Indirizzo;
 
 public class IndirizzoSource {
-	// Database fields
+	
+	
 	private SQLiteDatabase database;
 	private DaoHelper dbHelper;
 	private String[] allColumns = { "id_via","nome","latitudine","longitudine" };
@@ -37,8 +38,8 @@ public class IndirizzoSource {
 	}
 
 	public ArrayList<Indirizzo> fatchAllIndirizzi() {
+		
 		ArrayList<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
-		open();
 		Cursor cursor = database.query("indirizzo", allColumns, null, null,
 				null, null, null);
 
@@ -51,9 +52,9 @@ public class IndirizzoSource {
 
 		cursor.close();
 		return indirizzi;
+		
 	}
 	
-
 	private Indirizzo cursorToIndirizzo(Cursor cursor) {
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setId(cursor.getInt(0));

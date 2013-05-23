@@ -12,7 +12,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.univpm1.firenzestreests.entities.Sinistro;
 
 public class SinistroSource {
-	// Database fields
+
+	
 	private SQLiteDatabase database;
 	private DaoHelper dbHelper;
 	private String[] allColumns = { "id_sinistro","anno","numero","id_via_Fk"};
@@ -34,11 +35,11 @@ public class SinistroSource {
 		database.insert("sinistro", null, values);
 	}
 
-	public List<Sinistro> fatchAllIndirizzi() {
-		List<Sinistro> sinistri = new ArrayList<Sinistro>();
+	public ArrayList<Sinistro> fatchAllIndirizzi() {
+		
+		ArrayList<Sinistro> sinistri = new ArrayList<Sinistro>();
 
-		Cursor cursor = database.query("indirizzo", allColumns, null, null,
-				null, null, null);
+		Cursor cursor = database.query("sinistro", allColumns, null, null,null, null, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
@@ -50,8 +51,9 @@ public class SinistroSource {
 		return sinistri;
 	}
 
-	public List<Sinistro> getSinistroByVia(String[] id_via) {
-		List<Sinistro> sinistri = new ArrayList<Sinistro>();
+	public ArrayList<Sinistro> getSinistroByVia(String[] id_via) {
+		
+		ArrayList<Sinistro> sinistri = new ArrayList<Sinistro>();
 
 		Cursor cursor = database.rawQuery("select * from sinistro where id_via_Fk = ", id_via);
 
@@ -68,7 +70,10 @@ public class SinistroSource {
 	
 	private Sinistro cursorToSinistro(Cursor cursor) {
 		Sinistro sinistro = new Sinistro();
-		
+		sinistro.setIdSinistro(cursor.getInt(0));
+		sinistro.setAnno(cursor.getInt(1));
+		sinistro.setNumero(cursor.getInt(2));
+		sinistro.setIdVia(cursor.getInt(3));
 		return sinistro;
 	}
 }

@@ -12,10 +12,10 @@ import android.database.sqlite.SQLiteDatabase;
 import com.univpm1.firenzestreests.entities.Danno;
 
 public class DannoSource {
-	// Database fields
+	
 	private SQLiteDatabase database;
 	private DaoHelper dbHelper;
-	private String[] allColumns = {"id_danno","id_via","lesioni","contusi","morti" };
+	private String[] allColumns = {"id_danno","id_via","lesioni","contusi","morti"};
 
 	public DannoSource(Context context) {
 		dbHelper = new DaoHelper(context);
@@ -30,21 +30,22 @@ public class DannoSource {
 	}
 
 	public void insertDanno(Danno newDanno) {
-		ContentValues values = new ContentValues();
 		
+		ContentValues values = new ContentValues();
 		values.put("id_via",  newDanno.getIdVia());
 		values.put("lesioni",  newDanno.getLesioni());
-		values.put("contusi",  newDanno.getMorti());
+		values.put("contusi",  newDanno.getContusi());
+		values.put("morti",  newDanno.getMorti());
 		
 		database.insert("danno", null, values);
 
 	}
 
-	public List<Danno> fatchAllDanni() {
-		List<Danno> danni = new ArrayList<Danno>();
+	public ArrayList<Danno> fatchAllDanni() {
+		
+		ArrayList<Danno> danni = new ArrayList<Danno>();
 
-		Cursor cursor = database.query("danno", allColumns, null, null,
-				null, null, null);
+		Cursor cursor = database.query("danno", allColumns, null, null,null, null, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
@@ -57,8 +58,9 @@ public class DannoSource {
 	}
 
 	private Danno cursorToDanno(Cursor cursor) {
+		
 		Danno danno = new Danno();
-
+		danno.setIdDanno(cursor.getInt(0));
 		danno.setIdVia(cursor.getInt(1));
 		danno.setContusi(cursor.getInt(2));
 		danno.setMorti(cursor.getInt(3));
