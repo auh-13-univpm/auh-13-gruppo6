@@ -27,4 +27,8 @@ public class MainActivity extends Activity {
 	    Intent intent = new Intent(this, MapActivity.class);
 	    startActivity(intent);
 	}
+	public void dbTest(View View){
+		 Intent intent = new Intent(this, TestActivity.class);
+		 startActivity(intent);
+	}
 }

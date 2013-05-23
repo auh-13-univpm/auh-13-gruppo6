@@ -20,7 +20,7 @@ public class TestActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_test);
-		
+		getIntent();
 		datasource = new IndirizzoSource(this);
 	    datasource.open();
 
