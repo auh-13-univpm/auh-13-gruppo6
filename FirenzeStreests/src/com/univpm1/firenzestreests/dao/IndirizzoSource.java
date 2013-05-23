@@ -37,7 +37,7 @@ public class IndirizzoSource {
 		database.insert("indirizzo", null, values);
 	}
 
-	public ArrayList<Indirizzo> fatchAllIndirizzi() {
+	public ArrayList<Indirizzo> fetchAllIndirizzi() {
 		
 		ArrayList<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
 		Cursor cursor = database.query("indirizzo", allColumns, null, null,

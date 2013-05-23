@@ -1,6 +1,10 @@
 package com.univpm1.firenzestreests;
 
+import java.util.ArrayList;
+
 import com.univpm1.firenzestreests.dao.IndirizzoSource;
+import com.univpm1.firenzestreests.entities.Indirizzo;
+import com.univpm1.firenzestreests.util.ArrayListWrapper;
 
 
 import android.os.Bundle;
@@ -24,8 +28,16 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	public void onClick(View view) {
+		IndirizzoSource indirizziDb = new IndirizzoSource(getApplicationContext());
+		ArrayList<Indirizzo> indirizzi;
+		indirizziDb.open();
+		indirizzi = indirizziDb.fetchAllIndirizzi();
+		indirizziDb.close();
+		//ArrayListWrapper<Indirizzo> wrapper = new ArrayListWrapper<Indirizzo>(indirizzi);
+		//Bundle b = new Bundle();
+		//b.putSerializable("com.univpm1.firenzestreests.VIEW_MAP_COORDS", wrapper);
 	    Intent intent = new Intent(this, MapActivity.class);
-	    intent.putExtra("com.univpm1.firenzestreests.VIEW_MAP_COORDS",new IndirizzoSource(getApplicationContext()).fatchAllIndirizzi());
+	    intent.putExtra("com.univpm1.firenzestreests.VIEW_MAP_COORDS",indirizzi);
 	    startActivity(intent);
 	}
 	public void dbTest(View View){

@@ -58,7 +58,7 @@ public class TestActivity extends ListActivity {
 				break;
 			case R.id.list:
 				
-				ArrayList<Indirizzo> values = datasource.fatchAllIndirizzi();
+				ArrayList<Indirizzo> values = datasource.fetchAllIndirizzi();
 				
 				ArrayAdapter<Indirizzo> adapter2 = new ArrayAdapter<Indirizzo>(
 						this, android.R.layout.simple_list_item_1, values);

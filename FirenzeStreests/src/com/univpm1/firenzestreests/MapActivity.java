@@ -10,6 +10,7 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
+import com.univpm1.firenzestreests.util.ArrayListWrapper;
 import com.univpm1.firenzestreests.util.MyItemizedOverlay;
 import com.univpm1.firenzestreests.util.SystemUiHider;
 import com.univpm1.firenzestreests.entities.*;
@@ -134,7 +135,7 @@ public class MapActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		ArrayList<Indirizzo> addressList = new ArrayList<Indirizzo>();
 		if(extras != null){
-			addressList = (ArrayList<Indirizzo>) extras.get("com.univpm1.firenzestreests.VIEW_MAP_COORDS");
+			addressList = (ArrayList<Indirizzo>) extras.getSerializable("com.univpm1.firenzestreests.VIEW_MAP_COORDS");
 		}
 		
 //		addressList.add(new Indirizzo("Viale Europa","43.757035","11.29769"));
