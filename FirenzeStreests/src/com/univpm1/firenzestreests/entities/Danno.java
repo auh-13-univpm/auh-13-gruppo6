@@ -1,5 +1,7 @@
 package com.univpm1.firenzestreests.entities;
 
+import java.io.Serializable;
+
 
 /** Classe rappresentante la relazione Danno del Database
  * sono presenti i metodi get{NomeCampo} e set{NomeCampo} i quali rispettivamente
@@ -7,7 +9,7 @@ package com.univpm1.firenzestreests.entities;
  */
 
 
-public class Danno {
+public class Danno implements Serializable {
 	
 	private int id_danno;
 	private int id_via;

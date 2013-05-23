@@ -1,13 +1,19 @@
 package com.univpm1.firenzestreests.entities;
 
+import java.io.Serializable;
+
 /**
  * Classe rappresentante la relazione Indirizzo del Database sono presenti i
  * metodi get{NomeCampo} e set{NomeCampo} i quali rispettivamente assegnano il
  * valore e restituisconao il valore
  */
 
-public class Indirizzo {
+public class Indirizzo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id_indirizzo;
 	private String nome;
 	private String longitudine;
