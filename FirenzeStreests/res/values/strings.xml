@@ -9,5 +9,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="mappa_incidenti">Mappa incidenti</string>
+     <string name="test_db">TestaDB</string>
 
 </resources>
