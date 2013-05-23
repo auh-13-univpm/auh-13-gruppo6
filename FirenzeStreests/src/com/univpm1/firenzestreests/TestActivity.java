@@ -24,13 +24,13 @@ public class TestActivity extends ListActivity {
 		datasource = new IndirizzoSource(this);
 	    datasource.open();
 
-	    List<Indirizzo> values = datasource.fatchAllIndirizzi();
+	   // List<Indirizzo> values = datasource.fatchAllIndirizzi();
 
 	    // Use the SimpleCursorAdapter to show the
 	    // elements in a ListView
 	    
-	    ArrayAdapter<Indirizzo> adapter = new ArrayAdapter<Indirizzo>(this,android.R.layout.simple_list_item_1, values);
-	    setListAdapter(adapter);
+	  //  ArrayAdapter<Indirizzo> adapter = new ArrayAdapter<Indirizzo>(this,android.R.layout.simple_list_item_1, values);
+	  //  setListAdapter(adapter);
 	}
 
 	@Override
