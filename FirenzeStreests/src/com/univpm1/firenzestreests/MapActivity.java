@@ -148,10 +148,11 @@ public class MapActivity extends Activity {
 //        for(GeoPoint punto : puntiGps){
 //        	mapView.getController().animateTo(punto);
 //        }     
-        DefaultResourceProxyImpl defaultResourceProxyImpl = new DefaultResourceProxyImpl(this);
+        DefaultResourceProxyImpl defaultResourceProxyImpl = new DefaultResourceProxyImpl(getApplicationContext());
         ItemizedIconOverlay<OverlayItem> myItemizedIconOverlay  = new ItemizedIconOverlay<OverlayItem>(puntiGps, null, defaultResourceProxyImpl);
         mapView.getOverlays().add(myItemizedIconOverlay);
         setContentView(mapView);
+        mapView.invalidate();
 	}
 	private ArrayList<OverlayItem> indirizzoToGeoPoint(ArrayList<Indirizzo> indirizzi)
 	{
