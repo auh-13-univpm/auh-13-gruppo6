@@ -87,7 +87,7 @@
             android:layout_height="96dp"
             android:background="@drawable/setting"
             android:contentDescription="@string/setting"
-            android:onClick="onClick" />
+            android:onClick="settings" />
 
         <TextView
             android:layout_width="fill_parent"

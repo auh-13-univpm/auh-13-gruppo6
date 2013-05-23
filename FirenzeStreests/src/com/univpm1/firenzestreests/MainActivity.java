@@ -45,4 +45,8 @@ public class MainActivity extends Activity {
 		 Intent intent = new Intent(this, TestActivity.class);
 		 startActivity(intent);
 	}
+	public void settings(View View){
+		 Intent intent = new Intent(this, SettingActivity.class);
+		 startActivity(intent);
+	}
 }
