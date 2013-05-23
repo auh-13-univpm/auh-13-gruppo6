@@ -36,11 +36,8 @@ public class DaoHelper extends SQLiteOpenHelper{
 
 	  @Override
 	  public void onCreate(SQLiteDatabase database) {
-		System.out.println(TABLE_INDIRIZZO);
 	    database.execSQL(TABLE_INDIRIZZO);
-	    System.out.println(TABLE_SINISTRO);
 	    database.execSQL(TABLE_SINISTRO);
-	    System.out.println(TABLE_DANNO);
 	    database.execSQL(TABLE_DANNO);
 	  }
 
