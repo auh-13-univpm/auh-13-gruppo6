@@ -133,6 +133,7 @@ public class MapActivity extends Activity {
 		MapView mapView = new MapView(this, 256);
         mapView.setClickable(true);
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
+        mapView.setMultiTouchControls(true);
         mapView.setBuiltInZoomControls(true);        
         mapView.getController().setZoom(10);
         ArrayList<GeoPoint> puntiGps = indirizzoToGeoPoint(addressList);        
