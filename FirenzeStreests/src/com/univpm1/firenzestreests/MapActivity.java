@@ -2,6 +2,7 @@ package com.univpm1.firenzestreests;
 
 import java.util.ArrayList;
 
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
@@ -131,6 +132,7 @@ public class MapActivity extends Activity {
 		}
 		MapView mapView = new MapView(this, 256);
         mapView.setClickable(true);
+        mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
         mapView.setBuiltInZoomControls(true);        
         mapView.getController().setZoom(10);
         ArrayList<GeoPoint> puntiGps = indirizzoToGeoPoint(addressList);        
