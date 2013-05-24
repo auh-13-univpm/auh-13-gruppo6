@@ -93,6 +93,11 @@ public class ShowStreetActivity extends Activity {
 			tab.addView(tbrow);
 		}
 
+		Danno currDanno = danni.get(0);
+		((TextView) findViewById(R.id.valueMorti)).setText(currDanno.getMorti());
+		((TextView) findViewById(R.id.valueLesioni)).setText(currDanno.getLesioni());
+		((TextView) findViewById(R.id.valueContusi)).setText(currDanno.getContusi());
+		
 	}
 
 	@Override
