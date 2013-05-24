@@ -41,6 +41,20 @@ public class MainActivity extends Activity {
 	    intent.putExtra("com.univpm1.firenzestreests.VIEW_MAP_COORDS",indirizzi);
 	    startActivity(intent);
 	}
+
+	public void lista(View view) {
+		IndirizzoSource indirizziDb = new IndirizzoSource(getApplicationContext());
+		ArrayList<Indirizzo> indirizzi;
+		indirizziDb.open();
+		indirizzi = indirizziDb.fetchAllIndirizzi();
+		indirizziDb.close();
+		//ArrayListWrapper<Indirizzo> wrapper = new ArrayListWrapper<Indirizzo>(indirizzi);
+		//Bundle b = new Bundle();
+		//b.putSerializable("com.univpm1.firenzestreests.VIEW_MAP_COORDS", wrapper);
+	    Intent intent = new Intent(this, ListActivity.class);
+	    intent.putExtra("com.univpm1.firenzestreests.VIEW_MAP_COORDS",indirizzi);
+	    startActivity(intent);
+	}
 	public void dbTest(View View){
 		 Intent intent = new Intent(this, TestActivity.class);
 		 startActivity(intent);
