@@ -12,7 +12,11 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 
+<<<<<<< HEAD
 import com.univpm1.firenzestreests.entities.Indirizzo;
+=======
+import com.univpm1.firenzestreests.entities.Danno;
+>>>>>>> 5639f187311afbb59fd95ddee7a286f104b88981
 import com.univpm1.firenzestreests.entities.Sinistro;
 import com.univpm1.firenzestreests.util.AddressToCoords;
 
@@ -35,9 +39,29 @@ public class SinistroSource {
 	public void close() {
 		dbHelper.close();
 	}
+<<<<<<< HEAD
 
 	public ArrayList<String> fetchAllAnno() {
 		open();
+=======
+	public ArrayList<Integer>getVieByNumberof(int anno, boolean moreThan, int howMany){
+		ArrayList<Integer> sinistri = new ArrayList<Integer>();
+		String filterComparer = moreThan?" > ?":" < ?"; 
+		String filterList= Integer.valueOf(anno).toString();
+		String howMuch = Integer.valueOf(howMany).toString();
+		Cursor cursor=database.query("danno", allColumns, "anno = ? AND numero "+filterComparer+" ? " , new String[]{filterList,howMuch}, null, null, null);
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Sinistro sinistro = cursorToSinistro(cursor);
+			sinistri.add(sinistro.getIdVia());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return sinistri;
+	}
+	public ArrayList<String> fetchAllAnno(){
+>>>>>>> 5639f187311afbb59fd95ddee7a286f104b88981
 		ArrayList<String> anni = new ArrayList<String>();
 		Cursor cursor = database.query("sinistro", new String[] { "anno" },
 				null, null, null, null, null);

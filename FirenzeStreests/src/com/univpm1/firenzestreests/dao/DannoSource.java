@@ -70,7 +70,22 @@ public class DannoSource {
 
 		}
 	}
+	public ArrayList<Integer> getVieByNumberof(String what, boolean moreThan, int howMany){
+		ArrayList<Integer> danno = new ArrayList<Integer>();
+		String filterComparer = moreThan?" > ?":" < ?"; 
+		String filterList= what.toLowerCase() + filterComparer;
+		String howMuch = Integer.valueOf(howMany).toString();
+		Cursor cursor=database.query("danno", allColumns, filterList , new String[]{howMuch}, null, null, null);
 
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Danno sinistro = cursorToDanno(cursor);
+		danno.add(sinistro.getIdVia());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return danno;
+	}
 	public ArrayList<Danno> fatchAllDanni() {
 		open();
 		ArrayList<Danno> danni = new ArrayList<Danno>();

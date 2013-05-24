@@ -2,14 +2,20 @@ package com.univpm1.firenzestreests;
 
 import java.util.ArrayList;
 
+import com.univpm1.firenzestreests.dao.DannoSource;
+import com.univpm1.firenzestreests.dao.IndirizzoSource;
 import com.univpm1.firenzestreests.dao.SinistroSource;
+import com.univpm1.firenzestreests.entities.Indirizzo;
 import com.univpm1.firenzestreests.entities.Sinistro;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.support.v4.app.NavUtils;
 
@@ -36,6 +42,38 @@ public class FilterActivity extends Activity {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
 		spinner.setAdapter(adapter);
+	}
+	public void show(View view){
+		IndirizzoSource indirizziDb = new IndirizzoSource(getApplicationContext());
+		String filtro = ((Spinner) findViewById(R.id.filterSpinner)).getSelectedItem().toString();
+		boolean isMaggiore = ((Spinner) findViewById(R.id.spinner1)).getSelectedItem().toString().equals(getResources().getStringArray(R.array.compareArray)[0]);
+		ArrayList<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
+		int howMany = Integer.valueOf(((EditText) findViewById(R.id.editText1)).getText().toString()).intValue();
+				
+		ArrayList<Integer> idVie = new ArrayList<Integer>();
+		if(filtro.equals("Morti") || filtro.equals("Contusi") || filtro.equals("Lesioni"))
+		{
+			DannoSource ds = new DannoSource(getApplicationContext());
+			ds.open();
+			idVie = ds.getVieByNumberof(filtro, isMaggiore, howMany);
+			ds.close();
+		}else if(filtro.substring(0, 9).equals("Sinistri ")){
+			int anno = Integer.valueOf(filtro.substring(9)).intValue();
+			SinistroSource ss = new SinistroSource(getApplicationContext());
+			ss.open();
+			idVie = ss.getVieByNumberof(anno, isMaggiore, howMany);
+			ss.close();
+		}else{
+			return;
+		}
+		indirizziDb.open();
+		for(int i=0; i<idVie.size(); i++){
+		indirizzi.add(indirizziDb.fetchIndirizzoById(new String[]{Integer.valueOf(idVie.get(i)).toString()}));
+		}
+		indirizziDb.close();
+		Intent intent = new Intent(this, MapActivity.class);
+	    intent.putExtra("com.univpm1.firenzestreests.VIEW_MAP_COORDS",indirizzi);
+	    startActivity(intent);
 	}
 
 	/**
