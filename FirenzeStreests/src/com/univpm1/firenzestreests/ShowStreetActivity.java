@@ -48,23 +48,40 @@ public class ShowStreetActivity extends Activity {
 		String[] _idArr = new String[] { idIndirizzo };
 
 		DannoSource danniDb = new DannoSource(thisContext);
-		ArrayList<Danno> danni;
+		ArrayList<Danno> danni = new ArrayList<Danno>();
 		danniDb.open();
-		danni = danniDb.getDannoByVia(_idArr);
+		//danni = danniDb.getDannoByVia(_idArr);
 		danniDb.close();
+		Danno d = new Danno();
+		d.setIdVia(Integer.valueOf(idIndirizzo).intValue());
+		d.setContusi(3);
+		d.setLesioni(34);
+		d.setMorti(1);
+		danni.add(d);
 		SinistroSource sinistriDb = new SinistroSource(thisContext);
-		ArrayList<Sinistro> sinistri;
+		ArrayList<Sinistro> sinistri = new ArrayList<Sinistro>();
 		sinistriDb.open();
-		sinistri = sinistriDb.getSinistroByVia(_idArr);
+		//sinistri = sinistriDb.getSinistroByVia(_idArr);
 		sinistriDb.close();
-
+		Sinistro s1 = new Sinistro();
+		s1.setAnno(2009);
+		s1.setNumero(5);
+		Sinistro s2 = new Sinistro();
+		s2.setAnno(2009);
+		s2.setNumero(5);
+		Sinistro s3 = new Sinistro();
+		s3.setAnno(2009);
+		s3.setNumero(5);
+		sinistri.add(s1);
+		sinistri.add(s2);
+		sinistri.add(s3);		
 		IndirizzoSource indirizziDB = new IndirizzoSource(thisContext);
 		indirizziDB.open();
-		Indirizzo via = indirizziDB.fetchIndirizzoById(_idArr);
+		//Indirizzo via = indirizziDB.fetchIndirizzoById(_idArr);
 		indirizziDB.close();
 
 		TextView title = (TextView) findViewById(R.id.titleStreet);
-		title.setText(via.getNome());
+		title.setText("via dei tigli");//via.getNome());
 
 		TableLayout tab = (TableLayout) findViewById(R.id.table1);
 

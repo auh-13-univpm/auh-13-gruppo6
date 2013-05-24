@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
 		//Bundle b = new Bundle();
 		//b.putSerializable("com.univpm1.firenzestreests.VIEW_MAP_COORDS", wrapper);
 	    Intent intent = new Intent(this, ListActivity.class);
-	    intent.putExtra("com.univpm1.firenzestreests.VIEW_MAP_COORDS",indirizzi);
+	    intent.putExtra("com.univpm1.firenzestreests.VIEW_LIST_COORDS",indirizzi);
 	    startActivity(intent);
 	}
 	public void dbTest(View View){

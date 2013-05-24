@@ -23,8 +23,7 @@ public class ListActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		ArrayList<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
 		if (extras != null) {
-			indirizzi = (ArrayList<Indirizzo>) extras
-					.getSerializable("com.univpm1.firenzestreests.VIEW_MAP_COORDS");
+			indirizzi = (ArrayList<Indirizzo>) extras.getSerializable("com.univpm1.firenzestreests.VIEW_LIST_COORDS");
 		}
 
 		class LocalListner implements View.OnClickListener {
