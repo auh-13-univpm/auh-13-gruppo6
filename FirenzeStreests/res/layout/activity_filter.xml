@@ -46,6 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/linearLayout1"
         android:layout_below="@+id/linearLayout1"
-        android:text="Button" />
+        android:text="@string/showOnMap" />
 
 </RelativeLayout>
