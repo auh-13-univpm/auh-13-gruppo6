@@ -1,10 +1,7 @@
 package com.univpm1.firenzestreests;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import org.osmdroid.views.MapView.LayoutParams;
 
 import com.univpm1.firenzestreests.dao.DannoSource;
 import com.univpm1.firenzestreests.dao.IndirizzoSource;
