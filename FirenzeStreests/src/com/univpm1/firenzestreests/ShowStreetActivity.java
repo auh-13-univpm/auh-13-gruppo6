@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.osmdroid.views.MapView.LayoutParams;
+
 import com.univpm1.firenzestreests.dao.DannoSource;
 import com.univpm1.firenzestreests.dao.IndirizzoSource;
 import com.univpm1.firenzestreests.dao.SinistroSource;
@@ -13,6 +15,7 @@ import com.univpm1.firenzestreests.entities.Sinistro;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.widget.LinearLayout;
@@ -30,6 +33,7 @@ public class ShowStreetActivity extends Activity {
 		setContentView(R.layout.activity_show_street);
 		String idIndirizzo = null;
 		Bundle extras = getIntent().getExtras();
+		Context thisContext = this.getApplicationContext();
 		if (extras != null) {
 			idIndirizzo = extras
 					.getString("com.univpm1.firenzestreests.ID_INDIRIZZO");
@@ -38,7 +42,7 @@ public class ShowStreetActivity extends Activity {
 			Intent intent = new Intent(this, MainActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			this.startActivity(intent);
-			Toast toast = Toast.makeText(getApplicationContext(),
+			Toast toast = Toast.makeText(thisContext,
 					getResources().getString(R.string.erroreIdIndirizzo),
 					Toast.LENGTH_SHORT);
 			toast.show();
@@ -46,41 +50,49 @@ public class ShowStreetActivity extends Activity {
 		}
 		String[] _idArr = new String[] { idIndirizzo };
 
-		DannoSource danniDb = new DannoSource(getApplicationContext());
+		DannoSource danniDb = new DannoSource(thisContext);
 		ArrayList<Danno> danni;
 		danniDb.open();
 		danni = danniDb.getDannoByVia(_idArr);
 		danniDb.close();
-		SinistroSource sinistriDb = new SinistroSource(getApplicationContext());
+		SinistroSource sinistriDb = new SinistroSource(thisContext);
 		ArrayList<Sinistro> sinistri;
 		sinistriDb.open();
 		sinistri = sinistriDb.getSinistroByVia(_idArr);
 		sinistriDb.close();
 
-		IndirizzoSource indirizziDB = new IndirizzoSource(
-				getApplicationContext());
+		IndirizzoSource indirizziDB = new IndirizzoSource(thisContext);
 		indirizziDB.open();
-		Indirizzo via = indirizziDB
-				.fetchIndirizzoById(_idArr);
+		Indirizzo via = indirizziDB.fetchIndirizzoById(_idArr);
 		indirizziDB.close();
 
 		TextView title = (TextView) findViewById(R.id.titleStreet);
 		title.setText(via.getNome());
 
 		TableLayout tab = (TableLayout) findViewById(R.id.table1);
-		
+
 		// TODO scrivere la classe per ordinare in base all'anno.
-		//Collections.sort(sinistri)
-		
+		// Collections.sort(sinistri)
+
 		for (Sinistro sinistro : sinistri) {
-			TableRow tbrow = new TableRow(this);
-			LinearLayout year = new LinearLayout(this);
-			LinearLayout nCrash = new LinearLayout(this);
+			TableRow tbrow = new TableRow(thisContext);
+
+			LinearLayout yearTD = new LinearLayout(thisContext);
+			LinearLayout nCrashTD = new LinearLayout(thisContext);
+			TextView yearsTxt = new TextView(thisContext);
+			TextView nCrashTxt = new TextView(thisContext);
+			//===== Create Style
+	
 			
 			
+			//===== Append Data
+			yearsTxt.setText(sinistro.getAnno());
+			nCrashTxt.setText(sinistro.getNumero());
+			yearTD.addView(yearsTxt);
+			nCrashTD.addView(nCrashTxt);
+			tab.addView(tbrow);
 		}
-		
-		
+
 	}
 
 	@Override

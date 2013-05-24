@@ -78,7 +78,7 @@
                 android:layout_height="96dp"
                 android:background="@drawable/filter"
                 android:contentDescription="@string/filter"
-                android:onClick="onClick" />
+                android:onClick="Filter" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
                 android:layout_height="96dp"
                 android:background="@drawable/setting"
                 android:contentDescription="@string/setting"
-                android:onClick="onClick" />
+                android:onClick="settings" />
 
             <TextView
                 android:layout_width="wrap_content"
