@@ -64,16 +64,15 @@ public class IndirizzoSource {
 	    try{
 	    	database.beginTransaction();
 	    	while ((nextLine = bufferReader.readLine()) != null) {
-	    		if(i==0){
-	    			
-	    		} 
-	    		StringBuilder stringBuildered = new StringBuilder(InsertString1);
-	            String[] subArray = nextLine.split(",");
-	            stringBuildered.append("'" + subArray[0] + "',");
-	            stringBuildered.append(new AddressToCoords(subArray[0],cont).getLongitude());
-	            stringBuildered.append(new AddressToCoords(subArray[0],cont).getLatitude());
-	            stringBuildered.append(InsertString2);
-	            database.execSQL(stringBuildered.toString());
+	    		if(i>0){
+		    		StringBuilder stringBuildered = new StringBuilder(InsertString1);
+		            String[] subArray = nextLine.split(",");
+		            stringBuildered.append("'" + subArray[0] + "',");
+		            stringBuildered.append(new AddressToCoords(subArray[0],cont).getLongitude());
+		            stringBuildered.append(new AddressToCoords(subArray[0],cont).getLatitude());
+		            stringBuildered.append(InsertString2);
+		            database.execSQL(stringBuildered.toString());
+	            }
 	    		i++;
 	    	}
 	        database.setTransactionSuccessful();
