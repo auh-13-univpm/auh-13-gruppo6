@@ -12,6 +12,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 
+import com.univpm1.firenzestreests.entities.Danno;
 import com.univpm1.firenzestreests.entities.Indirizzo;
 import com.univpm1.firenzestreests.util.AddressToCoords;
 
@@ -106,7 +107,18 @@ public class IndirizzoSource {
 		return indirizzi;
 		
 	}
-	
+	public Indirizzo fetchIndirizzoById(String[] idVia) {
+		
+		Cursor cursor=database.query("danno", allColumns, "id_via = ?", idVia, null, null, null);
+
+		cursor.moveToFirst();
+		Indirizzo via = null;
+		while (!cursor.isAfterLast()) {
+			via = cursorToIndirizzo(cursor);
+		}
+		cursor.close();
+		return via;
+	}
 	private Indirizzo cursorToIndirizzo(Cursor cursor) {
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setId(cursor.getInt(0));
