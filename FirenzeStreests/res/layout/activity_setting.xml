@@ -8,25 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SettingActivity" >
 	 <!-- Download Button -->
-    <Button android:id="@+id/btnProgressBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Download File with Progress Bar"
-        android:layout_marginTop="50dip"/>
- <!-- READ Button -->
- 
-    <!-- Image view to show image after downloading -->
-    <ImageView android:id="@+id/my_image"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/read"
-        android:layout_width="match_parent"
+        android:id="@+id/btnProgressBar"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/my_image"
-        android:layout_marginTop="96dp"
-        android:onClick="clickTest"
-        android:text="load db" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/aggiornaDb" />
 
 </RelativeLayout>

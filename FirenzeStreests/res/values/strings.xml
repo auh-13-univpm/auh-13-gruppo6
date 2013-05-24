@@ -29,5 +29,6 @@
     <string name="lesioni">Lesioni: </string>
     <string name="contusi">Contusi: </string>
     <string name="zero">0</string>
+    <string name="aggiornaDb">Aggiorna Database</string>
 
 </resources>
