@@ -4,12 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -20,7 +18,9 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import au.com.bytecode.opencsv.CSVReader;
+
+import com.univpm1.firenzestreests.dao.IndirizzoSource;
+import com.univpm1.firenzestreests.entities.Indirizzo;
 
 public class SettingActivity extends Activity {
 
@@ -45,20 +45,18 @@ public class SettingActivity extends Activity {
 			public void onClick(View v) {
 
 				new DownloadFileFromURL().execute(CSV_URL);
+
+				IndirizzoSource ind = new IndirizzoSource(getApplicationContext());
+				try{
+					ind.loadIndirizzo();
+				}catch(Exception e){
+				
+				}
 			}
 		});
 	}
 	public void clickTest(View view) throws FileNotFoundException{
-		CSVReader reader = new CSVReader(new FileReader(Environment.getExternalStorageDirectory().toString()
-				+"/FirenzeStreets/database/sinistri.csv"));
-	    String [] nextLine;
-	    try{
-	    	while ((nextLine = reader.readNext()) != null) {
-		        System.out.println(nextLine[0] + nextLine[1] + "etc...");
-		    }
-	    }catch(Exception e){
-	    	
-	    }  
+		
 	}
 	/**
 	 * Showing Dialog
