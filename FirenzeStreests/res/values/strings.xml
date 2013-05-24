@@ -23,5 +23,6 @@
         <item>Maggiore di&#8230;</item>
         <item>Minore di&#8230;</item>
     </string-array>
+    <string name="showOnMap">Visualizza</string>
 
 </resources>
