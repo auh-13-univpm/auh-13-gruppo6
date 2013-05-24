@@ -1,6 +1,7 @@
 package com.univpm1.firenzestreests;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.univpm1.firenzestreests.dao.DannoSource;
@@ -14,6 +15,9 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,24 +44,42 @@ public class ShowStreetActivity extends Activity {
 			toast.show();
 			return;
 		}
+		String[] _idArr = new String[] { idIndirizzo };
+
 		DannoSource danniDb = new DannoSource(getApplicationContext());
 		ArrayList<Danno> danni;
 		danniDb.open();
-		danni = danniDb.getDannoByVia(new String[] { idIndirizzo });
+		danni = danniDb.getDannoByVia(_idArr);
 		danniDb.close();
 		SinistroSource sinistriDb = new SinistroSource(getApplicationContext());
 		ArrayList<Sinistro> sinistri;
 		sinistriDb.open();
-		sinistri = sinistriDb.getSinistroByVia(new String[] { idIndirizzo });
+		sinistri = sinistriDb.getSinistroByVia(_idArr);
 		sinistriDb.close();
-		
-		IndirizzoSource indirizziDB = new IndirizzoSource(getApplicationContext());
+
+		IndirizzoSource indirizziDB = new IndirizzoSource(
+				getApplicationContext());
 		indirizziDB.open();
-		Indirizzo via = new Indirizzo();
+		Indirizzo via = indirizziDB
+				.fetchIndirizzoById(_idArr);
 		indirizziDB.close();
 
 		TextView title = (TextView) findViewById(R.id.titleStreet);
 		title.setText(via.getNome());
+
+		TableLayout tab = (TableLayout) findViewById(R.id.table1);
+		
+		// TODO scrivere la classe per ordinare in base all'anno.
+		//Collections.sort(sinistri)
+		
+		for (Sinistro sinistro : sinistri) {
+			TableRow tbrow = new TableRow(this);
+			LinearLayout year = new LinearLayout(this);
+			LinearLayout nCrash = new LinearLayout(this);
+			
+			
+		}
+		
 		
 	}
 
