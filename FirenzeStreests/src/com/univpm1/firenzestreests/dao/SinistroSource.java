@@ -27,7 +27,18 @@ public class SinistroSource {
 	public void close() {
 		dbHelper.close();
 	}
-
+	
+	public ArrayList<String> fetchAllAnno(){
+		ArrayList<String> anni = new ArrayList<String>();
+		Cursor cursor = database.query("sinistro", new String[]{"anno"}, null, null,null, null, null);
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			anni.add("Sinistri "+Integer.valueOf(cursor.getInt(0)).toString());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return anni;
+	}
 	public void insertSinistro(Sinistro newSinistro) {
 		ContentValues values = new ContentValues();
 		database.insert("sinistro", null, values);

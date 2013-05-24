@@ -1,5 +1,10 @@
 package com.univpm1.firenzestreests;
 
+import java.util.ArrayList;
+
+import com.univpm1.firenzestreests.dao.SinistroSource;
+import com.univpm1.firenzestreests.entities.Sinistro;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -17,9 +22,16 @@ public class FilterActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		Spinner spinner = (Spinner) findViewById(R.id.filterSpinner);
+		SinistroSource sinistriDb = new SinistroSource(getApplicationContext());
+		ArrayList<String> anni;
+		sinistriDb.open();
+		anni = sinistriDb.fetchAllAnno();
+		sinistriDb.close();
+		anni.add("Morti");
+		anni.add("Contusi");
+		anni.add("Lesioni");
 		// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-		        R.array.planets_array, android.R.layout.simple_spinner_item);
+		ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, anni);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
