@@ -2,8 +2,24 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_gravity="center" >
+        android:layout_gravity="center"
+        android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/titleStreet"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:gravity="center|top"
+            android:text="@string/mark"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
+        <TableLayout
+            android:id="@+id/table1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            
+            
+        </TableLayout>
 
     </LinearLayout>
