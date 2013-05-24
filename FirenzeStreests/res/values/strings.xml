@@ -17,5 +17,6 @@
     <string name="title_activity_show_street">ShowStreetActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
     <string name="erroreIdIndirizzo">Errore selezione indirizzo!</string>
+    <string name="mark">-Loading-</string>
 
 </resources>
