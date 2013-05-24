@@ -19,6 +19,9 @@
     <string name="erroreIdIndirizzo">Errore selezione indirizzo!</string>
     <string name="title_activity_filter">Filtri</string>
     <string name="mark">-Loading-</string>
-
+	<string-array name="compareArray">
+        <item>Maggiore di&#8230;</item>
+        <item>Minore di&#8230;</item>
+    </string-array>
 
 </resources>

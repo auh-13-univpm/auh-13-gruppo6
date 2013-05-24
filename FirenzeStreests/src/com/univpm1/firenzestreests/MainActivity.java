@@ -49,4 +49,8 @@ public class MainActivity extends Activity {
 		 Intent intent = new Intent(this, SettingActivity.class);
 		 startActivity(intent);
 	}
+	public void Filter(View view){
+		Intent intent = new Intent(this, FilterActivity.class);
+		 startActivity(intent);		
+	}
 }
