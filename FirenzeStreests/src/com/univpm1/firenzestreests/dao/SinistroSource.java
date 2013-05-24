@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.univpm1.firenzestreests.entities.Danno;
 import com.univpm1.firenzestreests.entities.Sinistro;
 
 public class SinistroSource {
@@ -27,7 +28,22 @@ public class SinistroSource {
 	public void close() {
 		dbHelper.close();
 	}
-	
+	public ArrayList<Integer>getVieByNumberof(int anno, boolean moreThan, int howMany){
+		ArrayList<Integer> sinistri = new ArrayList<Integer>();
+		String filterComparer = moreThan?" > ?":" < ?"; 
+		String filterList= Integer.valueOf(anno).toString();
+		String howMuch = Integer.valueOf(howMany).toString();
+		Cursor cursor=database.query("danno", allColumns, "anno = ? AND numero "+filterComparer+" ? " , new String[]{filterList,howMuch}, null, null, null);
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Sinistro sinistro = cursorToSinistro(cursor);
+			sinistri.add(sinistro.getIdVia());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return sinistri;
+	}
 	public ArrayList<String> fetchAllAnno(){
 		ArrayList<String> anni = new ArrayList<String>();
 		Cursor cursor = database.query("sinistro", new String[]{"anno"}, null, null,null, null, null);

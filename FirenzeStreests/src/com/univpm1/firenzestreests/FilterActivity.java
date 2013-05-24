@@ -47,7 +47,7 @@ public class FilterActivity extends Activity {
 		IndirizzoSource indirizziDb = new IndirizzoSource(getApplicationContext());
 		String filtro = ((Spinner) findViewById(R.id.filterSpinner)).getSelectedItem().toString();
 		boolean isMaggiore = ((Spinner) findViewById(R.id.spinner1)).getSelectedItem().toString().equals(getResources().getStringArray(R.array.compareArray)[0]);
-		ArrayList<Indirizzo> indirizzi;
+		ArrayList<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
 		int howMany = Integer.valueOf(((EditText) findViewById(R.id.editText1)).getText().toString()).intValue();
 				
 		ArrayList<Integer> idVie = new ArrayList<Integer>();
@@ -63,14 +63,15 @@ public class FilterActivity extends Activity {
 			ss.open();
 			idVie = ss.getVieByNumberof(anno, isMaggiore, howMany);
 			ss.close();
+		}else{
+			return;
 		}
 		indirizziDb.open();
-		indirizzi = indirizziDb.fetchIndiri();
+		for(int i=0; i<idVie.size(); i++){
+		indirizzi.add(indirizziDb.fetchIndirizzoById(new String[]{Integer.valueOf(idVie.get(i)).toString()}));
+		}
 		indirizziDb.close();
-	//ArrayListWrapper<Indirizzo> wrapper = new ArrayListWrapper<Indirizzo>(indirizzi);
-		//Bundle b = new Bundle();
-		//b.putSerializable("com.univpm1.firenzestreests.VIEW_MAP_COORDS", wrapper);
-	    Intent intent = new Intent(this, MapActivity.class);
+		Intent intent = new Intent(this, MapActivity.class);
 	    intent.putExtra("com.univpm1.firenzestreests.VIEW_MAP_COORDS",indirizzi);
 	    startActivity(intent);
 	}
