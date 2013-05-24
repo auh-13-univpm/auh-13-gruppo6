@@ -51,6 +51,14 @@
             android:name="com.univpm1.firenzestreests.SettingActivity"
             android:label="@string/title_activity_setting" >
         </activity>
+        <activity
+            android:name="com.univpm1.firenzestreests.FilterActivity"
+            android:label="@string/title_activity_filter"
+            android:parentActivityName="com.univpm1.firenzestreests.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.univpm1.firenzestreests.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
