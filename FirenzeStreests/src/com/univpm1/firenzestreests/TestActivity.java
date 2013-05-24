@@ -35,9 +35,7 @@ public class TestActivity extends ListActivity {
 		@SuppressWarnings("unchecked")
 		ArrayAdapter<Indirizzo> adapter = (ArrayAdapter<Indirizzo>) getListAdapter();
 		switch (view.getId()) {
-			case R.id.add:
-				Indirizzo indirizzo = new Indirizzo("via uno", "12 ", "12");
-				datasource.insertIndirizzo(indirizzo);
+			case R.id.add:	
 				break;
 			case R.id.list:
 				ArrayList<Indirizzo> values = datasource.fetchAllIndirizzi();

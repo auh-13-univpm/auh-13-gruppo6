@@ -19,8 +19,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.univpm1.firenzestreests.dao.DannoSource;
 import com.univpm1.firenzestreests.dao.IndirizzoSource;
-import com.univpm1.firenzestreests.entities.Indirizzo;
+import com.univpm1.firenzestreests.dao.SinistroSource;
 
 public class SettingActivity extends Activity {
 
@@ -47,8 +48,12 @@ public class SettingActivity extends Activity {
 				new DownloadFileFromURL().execute(CSV_URL);
 
 				IndirizzoSource ind = new IndirizzoSource(getApplicationContext());
+				SinistroSource sin = new SinistroSource(getApplicationContext());
+				DannoSource dann = new DannoSource(getApplicationContext());
 				try{
 					ind.loadIndirizzo();
+					sin.loadSinistro();
+					dann.loadDanno();
 				}catch(Exception e){
 				
 				}

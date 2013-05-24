@@ -14,6 +14,7 @@ import android.os.Environment;
 
 import com.univpm1.firenzestreests.entities.Danno;
 import com.univpm1.firenzestreests.entities.Indirizzo;
+import com.univpm1.firenzestreests.entities.Sinistro;
 import com.univpm1.firenzestreests.util.AddressToCoords;
 
 public class IndirizzoSource {
@@ -37,60 +38,61 @@ public class IndirizzoSource {
 		dbHelper.close();
 	}
 
-	public void insertIndirizzo(Indirizzo newIndirizzo) {
-		ContentValues values = new ContentValues();
-		values.put("nome", newIndirizzo.getNome());
-		values.put("longitudine", newIndirizzo.getLongitudine());
-		values.put("latitudine", newIndirizzo.getLatitudine());
-		database.insert("indirizzo", null, values);
-	}
-	
 	
 	public void loadIndirizzo() throws FileNotFoundException {
-		//CSVReader reader = new CSVReader(new FileReader(Environment.getExternalStorageDirectory().toString()
-				//+"/FirenzeStreets/database/sinistri.csv"));
+		
 	    FileReader fileReader = new FileReader(Environment.getExternalStorageDirectory().toString()
 				+"/FirenzeStreets/database/sinistri.csv");
         BufferedReader bufferReader = new BufferedReader(fileReader);
-        
-     //   String l = "";
-        AddressToCoords adToCord;
-        String tableName ="indirizzo";
-        String columns = "nome,latitudine,longitudine";
-        String InsertString1 = "INSERT INTO " + tableName + " (" + columns + ") values(";
-        String InsertString2 = ");";
         int i=0;
 	    String nextLine;
+	    open();
+	    DaoHelper dao=new DaoHelper(cont);
+	    dao.onUpgrade(database,database.getVersion(), database.getVersion()+1);
+	    ContentValues values = new ContentValues();
 	    try{
 	    	database.beginTransaction();
 	    	while ((nextLine = bufferReader.readLine()) != null) {
 	    		if(i>0){
-		    		StringBuilder stringBuildered = new StringBuilder(InsertString1);
+		    		
 		            String[] subArray = nextLine.split(",");
-		            stringBuildered.append("'" + subArray[0] + "',");
-		            stringBuildered.append(new AddressToCoords(subArray[0],cont).getLongitude());
-		            stringBuildered.append(new AddressToCoords(subArray[0],cont).getLatitude());
-		            stringBuildered.append(InsertString2);
-		            database.execSQL(stringBuildered.toString());
+		            values.put("nome",  subArray[0]);
+		            values.put("latitudine", new AddressToCoords(subArray[0],cont).getLatitude());
+		            values.put("longitudine",  new AddressToCoords(subArray[0],cont).getLongitude());
+		            
+		            database.insert("indirizzo", null,values);
 	            }
 	    		i++;
 	    	}
 	        database.setTransactionSuccessful();
 	        database.endTransaction();
-		    
+		    close();
+			bufferReader.close();
 	    }catch(Exception e){
 	    	
 	    }  
-		/*ContentValues values = new ContentValues();
-		values.put("nome", newIndirizzo.getNome());
-		values.put("longitudine", newIndirizzo.getLongitudine());
-		values.put("latitudine", newIndirizzo.getLatitudine());
-		database.insert("indirizzo", null, values);*/
 	}
 	
 
+	public Indirizzo getViaByName(String nome) {
+
+		Indirizzo ind=new Indirizzo();
+		String[] name= new String[] {nome};
+		open();
+		Cursor cursor = database.query("indirizzo", allColumns, "nome = ?",
+				name, null, null, null);
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			ind= cursorToIndirizzo(cursor);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		close();
+		return ind;
+	}
+	
 	public ArrayList<Indirizzo> fetchAllIndirizzi() {
-		
+		open();
 		ArrayList<Indirizzo> indirizzi = new ArrayList<Indirizzo>();
 		Cursor cursor = database.query("indirizzo", allColumns, null, null,
 				null, null, null);
@@ -103,11 +105,12 @@ public class IndirizzoSource {
 		}
 
 		cursor.close();
+		close();
 		return indirizzi;
 		
 	}
 	public Indirizzo fetchIndirizzoById(String[] idVia) {
-		
+		open();
 		Cursor cursor=database.query("danno", allColumns, "id_via = ?", idVia, null, null, null);
 
 		cursor.moveToFirst();
@@ -116,6 +119,7 @@ public class IndirizzoSource {
 			via = cursorToIndirizzo(cursor);
 		}
 		cursor.close();
+		close();
 		return via;
 	}
 	private Indirizzo cursorToIndirizzo(Cursor cursor) {
