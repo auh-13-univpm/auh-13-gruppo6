@@ -59,6 +59,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.univpm1.firenzestreests.MainActivity" />
         </activity>
+        <activity
+            android:name="com.univpm1.firenzestreests.ListActivity"
+            android:label="@string/title_activity_list" >
+        </activity>
     </application>
 
 </manifest>

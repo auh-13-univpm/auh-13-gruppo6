@@ -19,10 +19,12 @@
     <string name="erroreIdIndirizzo">Errore selezione indirizzo!</string>
     <string name="title_activity_filter">Filtri</string>
     <string name="mark">-Loading-</string>
-	<string-array name="compareArray">
+
+    <string-array name="compareArray">
         <item>Maggiore di&#8230;</item>
         <item>Minore di&#8230;</item>
     </string-array>
+<<<<<<< HEAD
     <string name="showOnMap">Visualizza</string>
     <string name="total">Totale</string>
     <string name="morti">Morti: </string>
@@ -30,5 +32,15 @@
     <string name="contusi">Contusi: </string>
     <string name="zero">0</string>
     <string name="aggiornaDb">Aggiorna Database</string>
+=======
+
+    <string name="showOnMap">Visualizza</string>
+    <string name="total">Totale</string>
+    <string name="morti">Morti: </string>
+    <string name="lesioni">Lesioni: </string>
+    <string name="contusi">Contusi: </string>
+    <string name="zero">0</string>
+    <string name="title_activity_list">ListActivity</string>
+>>>>>>> 561a41d356f2826f377fd0df45f307d4b15948d1
 
 </resources>
