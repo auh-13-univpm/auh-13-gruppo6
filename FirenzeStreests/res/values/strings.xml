@@ -24,5 +24,10 @@
         <item>Minore di&#8230;</item>
     </string-array>
     <string name="showOnMap">Visualizza</string>
+    <string name="total">Totale</string>
+    <string name="morti">Morti: </string>
+    <string name="lesioni">Lesioni: </string>
+    <string name="contusi">Contusi: </string>
+    <string name="zero">0</string>
 
 </resources>
